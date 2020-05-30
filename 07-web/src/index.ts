@@ -1,15 +1,5 @@
 import { User } from "./models/User";
 
-const user = new User({ name: "alex", age: 30 });
+const user = new User({ id: 1 });
 
-user.on("change", () => {
-  console.log("change1");
-});
-user.on("change", () => {
-  console.log("change3");
-});
-user.on("save", () => {
-  console.log("save");
-});
-
-user.trigger("savess");
+user.fetch();
