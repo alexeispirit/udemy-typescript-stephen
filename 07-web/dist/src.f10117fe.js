@@ -130,6 +130,7 @@ var User =
 function () {
   function User(data) {
     this.data = data;
+    this.events = {};
   }
 
   User.prototype.get = function (propName) {
