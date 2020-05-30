@@ -7,6 +7,7 @@ export class HtmlReport implements OutputTarget {
       <div>
         <h1>Analysis Output</h1>
         <div>${report}</div>
+        <hr />
       </div>
     `;
 
