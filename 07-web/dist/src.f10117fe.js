@@ -2135,15 +2135,13 @@ Object.defineProperty(exports, "__esModule", {
 
 var User_1 = require("./models/User");
 
-var user = new User_1.User({
-  id: 1,
-  name: "173 name",
-  age: 173
+var user = User_1.User.buildUser({
+  id: 1
 });
-user.on("save", function () {
+user.on("change", function () {
   console.log(user);
 });
-user.save();
+user.fetch(); // user.save();
 },{"./models/User":"src/models/User.ts"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
