@@ -134,6 +134,10 @@ function () {
     this.bindModel();
   }
 
+  View.prototype.eventsMap = function () {
+    return {};
+  };
+
   View.prototype.bindModel = function () {
     var _this = this;
 
@@ -245,10 +249,7 @@ function (_super) {
       "click:.set-name": this.onSetNameClick,
       "click:.save-model": this.onSaveClick
     };
-  }; // <h1>User Form</h1>
-  // <div>User name: ${this.model.get("name")}</div>
-  // <div>User age: ${this.model.get("age")}</div>
-
+  };
 
   UserForm.prototype.template = function () {
     return "\n      <div>\n        <input placeholder=\"" + this.model.get("name") + "\" />\n        <button class=\"set-name\">Change Name</button>\n        <button class=\"set-age\">Set Random Age</button>\n        <button class=\"save-model\">Save User</button>\n      </div>\n    ";
