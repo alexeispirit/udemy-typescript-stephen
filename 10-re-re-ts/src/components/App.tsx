@@ -6,8 +6,8 @@ import { StoreState } from "../reducers";
 
 interface AppProps {
   todos: Todo[];
-  fetchTodos(): any;
-  deleteTodo(id: number): any;
+  fetchTodos: Function;
+  deleteTodo: typeof deleteTodo;
 }
 
 class _App extends React.Component<AppProps> {
