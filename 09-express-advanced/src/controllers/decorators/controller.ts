@@ -12,7 +12,7 @@ function bodyValidators(keys: string[]): RequestHandler {
 
     for (let key of keys) {
       if (!req.body[key]) {
-        return res.status(422).send("Invalid request");
+        return res.status(422).send(`Missing property ${key}`);
       }
     }
 
