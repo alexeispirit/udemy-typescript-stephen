@@ -1,20 +1,30 @@
+@classDecorator
 class Boat {
   @testDecorator
   color: string = "red";
 
+  @testDecorator
   get formattedColor(): string {
     return `This boats color is ${this.color}`;
   }
 
   @logError("Oops, boat was sunk in ocean")
-  pilot(): void {
+  pilot(@parameterDecorator speed: string): void {
     throw new Error();
     console.log("swish");
   }
 }
 
+function classDecorator(constructor: typeof Boat) {
+  console.log(constructor);
+}
+
+function parameterDecorator(target: any, key: string, index: number) {
+  console.log(key, index);
+}
+
 function testDecorator(target: any, key: string) {
-  console.log(target);
+  // console.log(target);
   console.log(key);
 }
 
@@ -32,4 +42,5 @@ function logError(errorMessage: string) {
   };
 }
 
-new Boat().pilot();
+const boat = new Boat();
+boat.pilot("fast");
