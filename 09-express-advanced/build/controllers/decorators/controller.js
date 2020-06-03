@@ -12,7 +12,18 @@ require("reflect-metadata");
 var AppRouter_1 = require("../../AppRouter");
 var MetadataKeys_1 = require("./MetadataKeys");
 function bodyValidators(keys) {
-    return function (req, res, next) { };
+    return function (req, res, next) {
+        if (!req.body) {
+            return res.status(422).send("Invalid request");
+        }
+        for (var _i = 0, keys_1 = keys; _i < keys_1.length; _i++) {
+            var key = keys_1[_i];
+            if (!req.body[key]) {
+                return res.status(422).send("Invalid request");
+            }
+        }
+        next();
+    };
 }
 function controller(routePrefix) {
     return function (target) {
@@ -23,8 +34,12 @@ function controller(routePrefix) {
             var method = Reflect.getMetadata(MetadataKeys_1.MetadataKeys.method, target.prototype, key);
             var middlewares = Reflect.getMetadata(MetadataKeys_1.MetadataKeys.middleware, target.prototype, key) ||
                 [];
+            var requiredBodyProps = Reflect.getMetadata(MetadataKeys_1.MetadataKeys.validator, target.prototype, key) ||
+                [];
+            var validator = bodyValidators(requiredBodyProps);
             if (path) {
-                router[method].apply(router, __spreadArrays(["" + routePrefix + path], middlewares, [routeHandler]));
+                router[method].apply(router, __spreadArrays(["" + routePrefix + path], middlewares, [validator,
+                    routeHandler]));
             }
         }
     };
